@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Blog_Demo.Models.Posts>
+
+@{
+    ViewBag.Title = "Posts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Articles</h3>
+
+@if(!Model.Any())
+{
+    <h5>No Posts so far...</h5>
+}
+else
+{
+    <div>
+        <table id="posts" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Section</th>
+                    <th>Author</th>
+                    <th>Published</th>
+                    <th>Likes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var post in Model)
+                {
+                <tr>
+                    <td>@Html.ActionLink(post.Name, "ViewPost", "Posts", new { id = post.Id }, null) </td>
+                    <td>@post.PostType.Name</td>
+                    <td>@post.Author</td>
+                    @if (post.IsPublished)
+                    {
+                        <td>Yes</td>
+                    }
+                    else
+                    {
+                        <td>No</td>
+                    }
+                    <td>@post.NoOfLikes</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

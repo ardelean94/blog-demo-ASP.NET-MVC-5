@@ -1,0 +1,36 @@
+﻿@model Blog_Demo.ViewModels.PostsTypesViewModel
+
+@{
+    ViewBag.Title = "New Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Article</h2>
+
+@using (Html.BeginForm("Save", "Posts"))
+{
+    @Html.ValidationSummary(true, "Some errors have occured.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Posts.Name)
+        @Html.TextBoxFor(m => m.Posts.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Posts.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Posts.Author)
+        @Html.TextBoxFor(m => m.Posts.Author, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Posts.Author)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Posts.PostType)
+        @Html.DropDownListFor(m => m.Posts.PostType.Id, new SelectList(Model.PostTypes, "Id", "Name"), "Select Article Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Posts.PostType.Id)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Posts.Description)
+        @Html.TextAreaFor(m => m.Posts.Description, 12, 12, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Posts.Description)
+    </div>
+    @Html.HiddenFor(m => m.Posts.Id)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}

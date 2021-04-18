@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Blog_Demo.Models.Posts>
+
+@{
+    ViewBag.Title = "Posts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Articles</h3>
+
+<button type="button" class="btn navbar-btn btn-default">@Html.ActionLink("New Article", "New", "Posts")</button>
+
+@if(!Model.Any())
+{
+    <h5>No Posts so far...</h5>
+}
+else
+{
+    <div>
+        <table id="posts" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Section</th>
+                    <th>Author</th>
+                    <th>Published</th>
+                    <th>Likes</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var post in Model)
+                {
+                <tr>
+                    <td>@Html.ActionLink(post.Name, "ViewPost", "Posts", new { id = post.Id }, null) </td>
+                    <td>@post.PostType.Name</td>
+                    <td>@post.Author</td>
+                    @if (post.IsPublished)
+                    {
+                        <td>Yes</td>
+                    }
+                    else
+                    {
+                        <td>No</td>
+                    }
+                    <td>@post.NoOfLikes</td>
+                    <td>@Html.ActionLink("Edit", "Edit", "Posts", new { id = post.Id }, null)</td>
+                    <td>@Html.ActionLink("Delete", "Delete", "Posts", new { id = post.Id }, 
+                       new { onclick = "return confirm('Are you sure you want to delete');" })</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
