@@ -1,4 +1,4 @@
 # Blog-demo - ASP.NET MVC 5
-blog-demo la la 
+blog-demo
 
 ASP.NET MVC Web Application
